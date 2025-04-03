@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "test": "cd react && npm run test && cd ../vue && npm run test:unit  && cd .. && npx playwright test --project=chromium",
+    "typecheck": "cd react && npm run typecheck && cd ../vue && npm run type-check ",
+    "init": "npm i && cd react && npm i && cd ../vue && npm i",
+    "dev": "concurrently \"cd react/ && PORT=4950 npm run dev\" \"cd vue && npm run dev\"",
+    "lint-format": "npx @biomejs/biome check --fix ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@playwright/test": "^1.51.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.13",
+    "lefthook": "^1.11.4",
+    "concurrently": "^9.1.2",
+    "vitest": "^3.1.1"
+  }
+}

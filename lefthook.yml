@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: false
+  commands:
+    lint-format:
+      run: npx @biomejs/biome check {staged_files}  
+      glob: "*.{js,ts,jsx,tsx,vue}"
+
+    typecheck-vue:
+      run: cd vue && npx tsc --noEmit
+    typecheck-react:
+      run: cd react && npx tsc --noEmit
