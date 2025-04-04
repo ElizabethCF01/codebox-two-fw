@@ -77,14 +77,14 @@ npm run lint-format
 ```
 codebox/
 ├── react/                # React implementation
-│   ├── src/              # Next.js app directory
-│   │   ├── components/   # Vue components
-│   │   ├── views/        # Component editor
+│   ├── src/              # Source files
+│   │   ├── components/   # React components
+│   │   ├── views/        # Editor, Preview etc
 │   └── ...
 ├── vue/                  # Vue implementation
 │   ├── src/              # Source files
 │   │   ├── components/   # Vue components
-│   │   ├── views/        # Vue views/pages
+│   │   ├── views/        # Editor, Preview etc
 │   │   └── ...
 │   └── ...
 ├── package.json          # Root package.json with scripts
