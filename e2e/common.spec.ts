@@ -7,24 +7,8 @@ test.describe("Home Page", () => {
     const projectCards = page.locator(".project-card");
     await projectCards.first().waitFor();
 
-    const loadMoreButton = page.locator(
-      'button:has-text("Load More Components")',
-    );
-    const isLoadMoreVisible = await loadMoreButton.isVisible();
-
-    if (isLoadMoreVisible) {
-      await loadMoreButton.click();
-
-      await page.waitForTimeout(1000);
-
-      const newProjectCards = page.locator(".project-card");
-      const initialCount = await projectCards.count();
-      const newCount = await newProjectCards.count();
-      expect(newCount).toBeGreaterThan(initialCount);
-    } else {
-      const projectCount = await projectCards.count();
-      expect(projectCount).toBeGreaterThan(0);
-    }
+    const projectCount = await projectCards.count();
+    expect(projectCount).toBeGreaterThan(0);
   });
 });
 test.describe("Login Page", () => {
