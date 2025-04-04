@@ -2,9 +2,8 @@ name: 🚀 CI/CD VueJS Pipeline
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main 
 
 jobs:
   ci:
