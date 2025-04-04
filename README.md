@@ -77,13 +77,9 @@ npm run lint-format
 ```
 codebox/
 ├── react/                # React implementation
-│   ├── app/              # Next.js app directory
-│   │   ├── page.tsx      # Home page
-│   │   ├── login/        # Login page
-│   │   └── editor/       # Component editor
-│   ├── components/       # React components
-│   │   ├── ui/           # shadcn/ui components
-│   │   └── custom-resizable.tsx  # Custom resizable panels
+│   ├── src/              # Next.js app directory
+│   │   ├── components/   # Vue components
+│   │   ├── views/        # Component editor
 │   └── ...
 ├── vue/                  # Vue implementation
 │   ├── src/              # Source files
