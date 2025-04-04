@@ -22,9 +22,9 @@
 
       <div class="flex items-center gap-4">
         <template v-if="!authStore.user">
-          <router-link to="/login" class="hidden md:flex btn btn-outline">Sign In</router-link>
+          <router-link to="/login" data-testid="sign-in-link" class="hidden md:flex btn btn-outline">Sign In</router-link>
 
-          <router-link to="/register" class="hidden btn btn-primary font-bold md:flex">
+          <router-link to="/register" data-testid="sign-up-link" class="hidden btn btn-primary font-bold md:flex">
             Sign Up
           </router-link>
         </template>
@@ -44,7 +44,7 @@
               class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
             >
               <li><RouterLink to="/">My profile</RouterLink></li>
-              <li><button @click="authStore.logout">Logout</button></li>
+              <li><button type="button" data-testid="logout-button" @click="authStore.logout">Logout</button></li>
             </ul>
           </div>
         </div>

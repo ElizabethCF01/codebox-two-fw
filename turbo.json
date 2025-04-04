@@ -1,8 +1,7 @@
 {
-  "pipeline": {
+  "tasks": {
     "dev": {
-      "dependsOn": ["^dev"],
-      "parallel": true
+      "dependsOn": ["^dev"]
     },
     "test": {
       "dependsOn": ["^test"],

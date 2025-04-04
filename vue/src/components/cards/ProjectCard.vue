@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group relative overflow-hidden rounded-lg border bg-background transition-all hover:shadow-md"
+    class="group project-card relative overflow-hidden rounded-lg border bg-background transition-all hover:shadow-md"
   >
     <div
       class="absolute top-2 right-2 z-10 flex gap-2 opacity-0 group-hover:opacity-100 ease-linear duration-200"
