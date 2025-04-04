@@ -1,64 +1,84 @@
-# vue-front-pen
+# Codebox
 
-This template should help get you started developing with Vue 3 in Vite.
+Codebox is a modern platform for discovering, creating, and sharing beautiful UI components. Similar to UIVerse.io but with its own unique features, Codebox allows developers to browse, customize, and use components in their projects.
 
-## Recommended IDE Setup
+## 📋 Table of Contents
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Project Structure](#project-structure)
 
-## Type Support for `.vue` Imports in TS
+## ✨ Features
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
 
-## Customize configuration
+- **Component Showcase**: Browse and discover beautiful UI components
+- **Authentication**: Basic login and registration
+- **Live Editor**: Edit components in real-time with Monaco Editor
+- **Responsive Design**: Components work across all device sizes
+- **Component Categories**: Organized by type (buttons, cards, inputs, etc.)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## 🛠️ Tech Stack
 
-## Project Setup
+### Shared Technologies
+- TypeScript
+- Vite
+- Monaco Editor
+- Vitest
+- Tailwind + daicyUI
+- Biome (linting/formatting)
+- Playwright (E2E testing)
 
-```sh
-npm install
+### React Implementation
+-  React
+- React Testing Library
+- Lucide React icons
+
+### Vue Implementation
+- Vue 3 (Composition API)
+- Lucide Vue icons
+- Vue Testing Library
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm (v8 or later)
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/ElizabethCF01/codebox-two-fw.git
+cd codebox-two-fw
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
+## 📜 Available Scripts
+npm run init
 npm run dev
-```
+npm run test
+npm run typecheck
+npm run lint-format
 
-### Type-Check, Compile and Minify for Production
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
-
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+## 📁 Project Structure
+componentverse/
+├── react/                # React implementation
+│   ├── app/              # Next.js app directory
+│   │   ├── page.tsx      # Home page
+│   │   ├── login/        # Login page
+│   │   └── editor/       # Component editor
+│   ├── components/       # React components
+│   │   ├── ui/           # shadcn/ui components
+│   │   └── custom-resizable.tsx  # Custom resizable panels
+│   └── ...
+├── vue/                  # Vue implementation
+│   ├── src/              # Source files
+│   │   ├── components/   # Vue components
+│   │   ├── views/        # Vue views/pages
+│   │   └── ...
+│   └── ...
+├── package.json          # Root package.json with scripts
+└── README.md             # This file
