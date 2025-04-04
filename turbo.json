@@ -1,0 +1,15 @@
+{
+  "pipeline": {
+    "dev": {
+      "dependsOn": ["^dev"],
+      "parallel": true
+    },
+    "test": {
+      "dependsOn": ["^test"],
+      "outputs": []
+    },
+    "typecheck": {
+      "dependsOn": ["^typecheck"]
+    }
+  }
+}

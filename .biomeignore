@@ -1,0 +1,10 @@
+
+react/tsconfig.json
+react/tsconfig.app.json
+vue/tsconfig.json
+vue/tsconfig.app.json
+vue/tsconfig.node.json
+react/tsconfig.node.json
+
+node_modules/
+dist/

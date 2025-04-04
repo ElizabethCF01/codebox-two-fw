@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { StrapiUserResponse } from "../interfaces/user";
 import { devtools, persist } from "zustand/middleware";
+import type { StrapiUserResponse } from "../interfaces/user";
 interface AuthState {
   user: StrapiUserResponse | undefined;
   jwt: string | undefined;
@@ -19,7 +19,7 @@ export const useAuthStore = create<AuthState>()(
         setJwt: (jwt) => set({ jwt }),
         logout: () => set({ user: undefined, jwt: undefined }),
       }),
-      { name: "auth" }
-    )
-  )
+      { name: "auth" },
+    ),
+  ),
 );

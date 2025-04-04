@@ -1,44 +1,44 @@
-import type { Pagination } from './pagination'
-import type { Tag } from './tag'
-import type { StrapiUserResponse } from './user'
+import type { Pagination } from "./pagination";
+import type { Tag } from "./tag";
+import type { StrapiUserResponse } from "./user";
 
 export interface Project {
-  id: number
-  name: string
-  htmlCode: string
-  cssCode: string
-  jsCode: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
-  author: StrapiUserResponse
-  documentId: string
-  tag: Tag
+  id: number;
+  name: string;
+  htmlCode: string;
+  cssCode: string;
+  jsCode: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  author: StrapiUserResponse;
+  documentId: string;
+  tag: Tag;
 }
 export interface ProjectRequest {
   data: {
-    name: string
-    htmlCode: string
-    cssCode: string
-    jsCode: string
+    name: string;
+    htmlCode: string;
+    cssCode: string;
+    jsCode: string;
     tag: {
-      connect: string[]
-    }
+      connect: string[];
+    };
     author: {
-      connect: Connect[]
-    }
-  }
+      connect: Connect[];
+    };
+  };
 }
 export interface Connect {
-  id: number
-  documentId: string
+  id: number;
+  documentId: string;
 }
 export interface ProjectsResponse {
-  data: Project[]
+  data: Project[];
   meta: {
-    pagination: Pagination
-  }
+    pagination: Pagination;
+  };
 }
 export interface ProjectResponse {
-  data: Project
+  data: Project;
 }

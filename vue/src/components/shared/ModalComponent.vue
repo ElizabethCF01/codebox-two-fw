@@ -6,7 +6,7 @@
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->
-          <button @click="close" class="btn btn-primary">Accept</button>
+          <button type="button" @click="close" class="btn btn-primary">Accept</button>
         </form>
       </div>
     </div>
@@ -16,8 +16,8 @@
 defineProps({
   title: String,
   text: String,
-})
-const emits = defineEmits(['close'])
+});
+const emits = defineEmits(["close"]);
 
-const close = () => emits('close')
+const close = () => emits("close");
 </script>

@@ -35,7 +35,7 @@
                 <div
                   class="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 bg-stone-800"
                 >
-                  <img :src="'https://robohash.org/' + authStore.user.email + '.png'" />
+                  <img :src="'https://robohash.org/' + authStore.user.email + '.png'"  alt="avatar"/>
                 </div>
               </div>
             </div>
@@ -43,13 +43,13 @@
               tabindex="0"
               class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
             >
-              <li><a href="#">My profile</a></li>
+              <li><RouterLink to="/">My profile</RouterLink></li>
               <li><button @click="authStore.logout">Logout</button></li>
             </ul>
           </div>
         </div>
 
-        <button size="icon" class="md:hidden btn btn-ghost btn-circle">
+        <button type="button" size="icon" class="md:hidden btn btn-ghost btn-circle">
           <MenuIcon class="h-5 w-5" />
         </button>
       </div>
@@ -57,7 +57,7 @@
   </header>
 </template>
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/auth'
-import { SparklesIcon, MenuIcon } from 'lucide-vue-next'
-const authStore = useAuthStore()
+import { useAuthStore } from "@/stores/auth";
+import { MenuIcon, SparklesIcon } from "lucide-vue-next";
+const authStore = useAuthStore();
 </script>

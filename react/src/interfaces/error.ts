@@ -1,6 +1,5 @@
 export interface StrapiErrorResponse {
-    error: {
-      message: string
-    }
-  }
-  
+  error: {
+    message: string;
+  };
+}

@@ -23,13 +23,13 @@
         </nav>
 
         <div class="flex items-center gap-4">
-          <button class="btn btn-sm btn-ghost btn-circle">
+          <button type="button" class="btn btn-sm btn-ghost btn-circle">
             <IconGithub class="h-5 w-5" />
           </button>
-          <button class="btn btn-sm btn-ghost btn-circle">
+          <button type="button" class="btn btn-sm btn-ghost btn-circle">
             <IconInstagram class="h-5 w-5" />
           </button>
-          <button class="btn btn-sm btn-ghost btn-circle">
+          <button type="button" class="btn btn-sm btn-ghost btn-circle">
             <IconLinkedin class="h-5 w-5" />
           </button>
         </div>
@@ -40,8 +40,8 @@
   </footer>
 </template>
 <script setup lang="ts">
-import { Sparkles } from 'lucide-vue-next'
-import IconInstagram from '@/components/icons/IconInstagram.vue'
-import IconGithub from '@/components/icons/IconGithub.vue'
-import IconLinkedin from '@/components/icons/IconLinkedin.vue'
+import IconGithub from "@/components/icons/IconGithub.vue";
+import IconInstagram from "@/components/icons/IconInstagram.vue";
+import IconLinkedin from "@/components/icons/IconLinkedin.vue";
+import { Sparkles } from "lucide-vue-next";
 </script>

@@ -1,48 +1,48 @@
 <script setup lang="ts">
-import { PlusCircle, Filter } from 'lucide-vue-next'
-import ProjectCard from '@/components/cards/ProjectCard.vue'
-import ProjectCardSkeleton from '@/components/cards/ProjectCardSkeleton.vue'
-import { useProjects } from '@/composables/useProject'
-import { onMounted, ref, watch, type Ref } from 'vue'
-import type { Project } from '@/interfaces/project'
-import { useAuthStore } from '@/stores/auth'
-import { useTag } from '@/composables/useTag'
-import type { Tag } from '@/interfaces/tag'
+import ProjectCard from "@/components/cards/ProjectCard.vue";
+import ProjectCardSkeleton from "@/components/cards/ProjectCardSkeleton.vue";
+import { useProjects } from "@/composables/useProject";
+import { useTag } from "@/composables/useTag";
+import type { Project } from "@/interfaces/project";
+import type { Tag } from "@/interfaces/tag";
+import { useAuthStore } from "@/stores/auth";
+import { Filter, PlusCircle } from "lucide-vue-next";
+import { type Ref, onMounted, ref, watch } from "vue";
 
-const { getProjectList } = useProjects()
-const { getTagList } = useTag()
-const authStore = useAuthStore()
-const projects: Ref<Project[]> = ref([])
-const isLoading = ref(false)
-const hasMore = ref(false)
-const page = ref(0)
-const tags = ref<Tag[]>([])
-const tagSelected = ref('all')
+const { getProjectList } = useProjects();
+const { getTagList } = useTag();
+const authStore = useAuthStore();
+const projects: Ref<Project[]> = ref([]);
+const isLoading = ref(false);
+const hasMore = ref(false);
+const page = ref(0);
+const tags = ref<Tag[]>([]);
+const tagSelected = ref("all");
 
 onMounted(async () => {
-  handleLoadMore()
-  tags.value = await getTagList()
-})
+  handleLoadMore();
+  tags.value = await getTagList();
+});
 const handleLoadMore = async () => {
-  isLoading.value = true
-  let query = ''
-  if (tagSelected.value != 'all') {
-    query = `&filters[tag][documentId][$eq]=${tagSelected.value}`
+  isLoading.value = true;
+  let query = "";
+  if (tagSelected.value !== "all") {
+    query = `&filters[tag][documentId][$eq]=${tagSelected.value}`;
   }
-  const response = await getProjectList(page.value + 1, query)
-  projects.value = [...projects.value, ...response.list]
-  hasMore.value = response.hasMore
-  page.value++
-  isLoading.value = false
-}
+  const response = await getProjectList(page.value + 1, query);
+  projects.value = [...projects.value, ...response.list];
+  hasMore.value = response.hasMore;
+  page.value++;
+  isLoading.value = false;
+};
 watch(
   () => tagSelected.value,
   () => {
-    page.value = 0
-    projects.value = []
-    handleLoadMore()
+    page.value = 0;
+    projects.value = [];
+    handleLoadMore();
   },
-)
+);
 </script>
 
 <template>
@@ -69,7 +69,7 @@ watch(
               <PlusCircle class="h-4 w-4" />
               Submit Component
             </RouterLink>
-            <button class="gap-2 btn btn-wide btn-primary">Browse Components</button>
+            <button type="button" class="gap-2 btn btn-wide btn-primary">Browse Components</button>
           </div>
         </div>
       </div>
@@ -86,6 +86,7 @@ watch(
               class="tab"
               :class="{ 'tab-active': tagSelected === 'all' }"
               @click="tagSelected = 'all'"
+              type="button"
             >
               All
             </button>
@@ -96,13 +97,14 @@ watch(
               class="tab"
               :class="{ 'tab-active': tagSelected === tag.documentId }"
               @click="tagSelected = tag.documentId"
+              type="button"
             >
               {{ tag.name }}
             </button>
           </div>
 
           <div class="flex items-center gap-4">
-            <button class="gap-2 btn btn-outline">
+            <button type="button" class="gap-2 btn btn-outline">
               <Filter class="h-4 w-4" />
               Filter
             </button>
@@ -122,7 +124,7 @@ watch(
         </div>
 
         <div v-show="hasMore && !isLoading" class="flex justify-center mt-12">
-          <button @click="handleLoadMore" class="gap-2 btn btn-outline btn-wide">
+          <button type="button" @click="handleLoadMore" class="gap-2 btn btn-outline btn-wide">
             Load More Components
           </button>
         </div>

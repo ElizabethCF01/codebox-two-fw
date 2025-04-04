@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import IconGithub from '@/components/icons/IconGithub.vue'
-import IconGoogle from '@/components/icons/IconGoogle.vue'
-import IconRobot from '@/components/icons/IconRobot.vue'
-import { useLogin } from '@/composables/useLogin'
-import { ref } from 'vue'
-import { RouterLink, useRoute } from 'vue-router'
+import IconGithub from "@/components/icons/IconGithub.vue";
+import IconGoogle from "@/components/icons/IconGoogle.vue";
+import IconRobot from "@/components/icons/IconRobot.vue";
+import { useLogin } from "@/composables/useLogin";
+import { ref } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 
-const route = useRoute()
-const { login, register } = useLogin()
+const route = useRoute();
+const { login, register } = useLogin();
 
-const email = ref('')
-const password = ref('')
-const username = ref('')
+const email = ref("");
+const password = ref("");
+const username = ref("");
 const handleSubmit = async () => {
-  console.log('email.value', email.value)
-  if (route.name == 'login') await login(email.value, password.value)
-  else register(username.value, email.value, password.value)
-}
+  console.log("email.value", email.value);
+  if (route.name === "login") await login(email.value, password.value);
+  else register(username.value, email.value, password.value);
+};
 </script>
 
 <template>
@@ -39,7 +39,7 @@ const handleSubmit = async () => {
                 <div v-show="!email" class="flex h-full flex-1 justify-center items-center">
                   <IconRobot class="h-12 w-12" />
                 </div>
-                <img v-show="email" :src="`https://robohash.org/${email}.png`" />
+                <img v-show="email" :src="`https://robohash.org/${email}.png`" alt="robot" />
               </div>
             </div>
             <span class="text-sm text-muted-foreground">Unique avatar based on your email</span>
@@ -138,11 +138,11 @@ const handleSubmit = async () => {
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-              <button class="w-full btn btn-outline">
+              <button type="button" class="w-full btn btn-outline">
                 <IconGithub class="h-4 w-4" />
                 Github
               </button>
-              <button class="w-full btn btn-outline">
+              <button type="button" class="w-full btn btn-outline">
                 <IconGoogle class="h-4 w-4" />
                 Google
               </button>

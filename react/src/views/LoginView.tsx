@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useLogin } from "../hooks/useLogin";
+import type React from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router";
-import { IconGoogle } from "../components/icons/IconGoogle";
 import { IconGithub } from "../components/icons/IconGithub";
+import { IconGoogle } from "../components/icons/IconGoogle";
 import { IconRobot } from "../components/icons/IconRobot";
+import { useLogin } from "../hooks/useLogin";
 
 export default function LoginView() {
   const { login, register } = useLogin();
@@ -14,7 +15,7 @@ export default function LoginView() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-   
+
     if (location.pathname.includes("login")) await login(email, password);
     else register(username, email, password);
   };
@@ -38,11 +39,12 @@ export default function LoginView() {
                       <div className="flex h-full flex-1 justify-center items-center">
                         <IconRobot className="h-12 w-12" />
                       </div>
-                    ): 
-                    <img
-                      src={`https://robohash.org/${email}.png`}
-                    />}
-                    
+                    ) : (
+                      <img
+                        src={`https://robohash.org/${email}.png`}
+                        alt="avatar"
+                      />
+                    )}
                   </div>
                 </div>
                 <span className="text-sm text-muted-foreground">
@@ -101,12 +103,14 @@ export default function LoginView() {
                       >
                         Password
                       </label>
-                     {location.pathname.includes("login") && <Link
-                        to="/forgot-password"
-                        className="text-sm font-medium text-primary hover:underline underline-offset-4"
-                      >
-                        Forgot password?
-                      </Link>}
+                      {location.pathname.includes("login") && (
+                        <Link
+                          to="/forgot-password"
+                          className="text-sm font-medium text-primary hover:underline underline-offset-4"
+                        >
+                          Forgot password?
+                        </Link>
+                      )}
                     </div>
                     <input
                       id="password"
@@ -120,11 +124,7 @@ export default function LoginView() {
                     />
                   </div>
                   <div className="flex items-center gap-2 space-x-2">
-                    <input
-                      id="remember"
-                      type="checkbox"
-                      className="checkbox"
-                    />
+                    <input id="remember" type="checkbox" className="checkbox" />
                     <label
                       htmlFor="remember"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -156,11 +156,11 @@ export default function LoginView() {
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <button className="w-full btn btn-outline">
+                <button type="button" className="w-full btn btn-outline">
                   <IconGithub className="h-4 w-4" />
                   Github
                 </button>
-                <button className="w-full btn btn-outline">
+                <button type="button" className="w-full btn btn-outline">
                   <IconGoogle className="h-4 w-4" />
                   Google
                 </button>
@@ -178,9 +178,7 @@ export default function LoginView() {
                 </Link>
               </div>
             ) : (
-              <div
-                className="px-8 pt-8 text-center text-sm text-muted-foreground"
-              >
+              <div className="px-8 pt-8 text-center text-sm text-muted-foreground">
                 Already registerd?
                 <Link
                   to="/login"

@@ -29,34 +29,27 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
-    baseURL: 'http://localhost:5173',
-    browserName: 'chromium',
+    trace: "on-first-retry",
+    browserName: "chromium",
     headless: true,
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: "react",
+      use: { ...devices["Desktop Chrome"], baseURL: "http://localhost:5173" },
     },
-
     {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
-
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
+      name: "vue",
+      use: { ...devices["Desktop Chrome"], baseURL: "http://localhost:5174" },
     },
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "npm run dev",
-    port: 5173,
-    reuseExistingServer: !process.env.CI,
-  },
+  //   webServer: {
+  //     command: "npm run dev",
+  //     port: 5173,
+  //     reuseExistingServer: !process.env.CI,
+  //   },
 });

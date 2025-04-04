@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "test": "cd react && npm run test && cd ../vue && npm run test:unit  && cd .. && npx playwright test --project=chromium",
-    "typecheck": "cd react && npm run typecheck && cd ../vue && npm run type-check ",
-    "init": "npm i && cd react && npm i && cd ../vue && npm i",
-    "dev": "concurrently \"cd react/ && PORT=4950 npm run dev\" \"cd vue && npm run dev\"",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "init": "npm install",
+    "dev": "(cd react && npm run dev &) && (cd vue && npm run dev &) && wait",
     "lint-format": "npx @biomejs/biome check --fix ."
   },
   "devDependencies": {
@@ -12,7 +12,7 @@
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.13",
     "lefthook": "^1.11.4",
-    "concurrently": "^9.1.2",
+    "turbo": "^2.5.0",
     "vitest": "^3.1.1"
   }
 }

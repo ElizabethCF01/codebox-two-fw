@@ -1,10 +1,10 @@
-import { Routes, Route } from "react-router";
+import { Route, Routes } from "react-router";
+import EditorView from "../views/EditorView";
 import HomeView from "../views/HomeView";
 import LoginView from "../views/LoginView";
-import EditorView from "../views/EditorView";
 
-const Router: React.FC = () =>{return (
-
+const Router: React.FC = () => {
+  return (
     <Routes>
       <Route path="/" element={<HomeView />} />
       <Route path="/login" element={<LoginView />} />
@@ -12,5 +12,6 @@ const Router: React.FC = () =>{return (
       <Route path="/editor" element={<EditorView />} />
       <Route path="/preview/:id" element={<EditorView />} />
     </Routes>
-)}
+  );
+};
 export default Router;

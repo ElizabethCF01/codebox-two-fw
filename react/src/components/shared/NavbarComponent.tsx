@@ -1,6 +1,6 @@
 import { MenuIcon, SparklesIcon } from "lucide-react";
-import { useAuthStore } from "../../stores/auth";
 import { Link } from "react-router";
+import { useAuthStore } from "../../stores/auth";
 
 export default function NavbarComponent() {
   const user = useAuthStore((state) => state.user);
@@ -30,27 +30,28 @@ export default function NavbarComponent() {
 
         <div className="flex items-center gap-4">
           {user ? (
-            
-              <details className="dropdown">
-                <summary className="">
-                  <div className="avatar">
-                    <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 bg-stone-800">
-                      <img
-                        src={"https://robohash.org/" + user?.email + ".png"}
-                      />
-                    </div>
+            <details className="dropdown">
+              <summary className="">
+                <div className="avatar">
+                  <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 bg-stone-800">
+                    <img
+                      src={`https://robohash.org/${user?.email}.png`}
+                      alt="user"
+                    />
                   </div>
-                </summary>
-                <ul className="menu dropdown-content  rounded-box  w-52 p-2 shadow-sm  bg-base-100  z-1  ">
-                  <li>
-                    <a href="#">My profile</a>
-                  </li>
-                  <li>
-                    <button onClick={logout}>Logout</button>
-                  </li>
-                </ul>
-              </details>
-             
+                </div>
+              </summary>
+              <ul className="menu dropdown-content  rounded-box  w-52 p-2 shadow-sm  bg-base-100  z-1  ">
+                <li>
+                  <Link to="/">My profile</Link>
+                </li>
+                <li>
+                  <button type="button" onClick={logout}>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </details>
           ) : (
             <>
               <Link to="/login" className="hidden md:flex btn btn-outline">
@@ -66,7 +67,7 @@ export default function NavbarComponent() {
             </>
           )}
 
-          <button className="md:hidden btn btn-ghost btn-circle">
+          <button type="button" className="md:hidden btn btn-ghost btn-circle">
             <MenuIcon className="h-5 w-5" />
           </button>
         </div>

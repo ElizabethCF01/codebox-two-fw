@@ -1,13 +1,13 @@
 import Editor from "@monaco-editor/react";
-import { useEffect, useRef, useState } from "react";
+import { CirclePlay, Save } from "lucide-react";
 import * as monaco from "monaco-editor";
-import { Tag } from "../interfaces/tag";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import ModalComponent from "../components/shared/ModalComponent";
 import { useProject } from "../hooks/useProject";
 import { useTag } from "../hooks/useTag";
+import type { Tag } from "../interfaces/tag";
 import { useAuthStore } from "../stores/auth";
-import { CirclePlay, Save } from "lucide-react";
-import ModalComponent from "../components/shared/ModalComponent";
 
 const MONACO_EDITOR_OPTIONS = {
   automaticLayout: true,
@@ -31,7 +31,7 @@ export default function EditorView() {
     javascript: 'console.log("hello world");',
   });
   const [language, setLanguage] = useState<"html" | "css" | "javascript">(
-    "html"
+    "html",
   );
   const [tags, setTags] = useState<Tag[]>([]);
   const [tag, setTag] = useState("");
@@ -139,38 +139,41 @@ export default function EditorView() {
       <div className="editor w-full h-[calc(100vh-70px)]">
         {isLoading ? (
           <div className="flex w-full items-center justify-center flex-1">
-            <span className="loading loading-spinner loading-sm"></span>
+            <span className="loading loading-spinner loading-sm" />
           </div>
         ) : (
           <div className="flex-1 flex overflow-hidden aspect-16/9 bg-stone-900">
             <div className="h-[calc(100vh-70px)] w-full flex flex-col bg-stone-800 border-r border-white/40">
               <div className="p-2 gap-2 flex items-center">
                 <div role="tablist" className="tabs tabs-box">
-                  <a
+                  <button
                     role="tab"
+                    type="button"
                     className={`tab ${language === "html" ? "tab-active" : ""}`}
                     onClick={() => setLanguage("html")}
                   >
                     HTML
-                  </a>
-                  <a
+                  </button>
+                  <button
                     role="tab"
+                    type="button"
                     className={`tab ${language === "css" ? "tab-active" : ""}`}
                     onClick={() => setLanguage("css")}
                   >
                     CSS
-                  </a>
-                  <a
+                  </button>
+                  <button
                     role="tab"
+                    type="button"
                     className={`tab ${
                       language === "javascript" ? "tab-active" : ""
                     }`}
                     onClick={() => setLanguage("javascript")}
                   >
                     JS
-                  </a>
+                  </button>
                 </div>
-                <div className="ml-auto"></div>
+                <div className="ml-auto" />
                 {!id && (
                   <button
                     onClick={() => setShowModal(true)}
@@ -178,7 +181,7 @@ export default function EditorView() {
                     className="btn btn-outline font-bold"
                   >
                     {isSaving ? (
-                      <span className="loading loading-spinner loading-sm"></span>
+                      <span className="loading loading-spinner loading-sm" />
                     ) : (
                       <Save className="h-5 w-5" />
                     )}
@@ -224,7 +227,9 @@ export default function EditorView() {
                 className="ide w-full h-full bg-stone-900 transition-all ease-in"
                 srcDoc={output}
                 sandbox="allow-scripts"
-              ></iframe>
+                aria-label="Codebox project"
+                title="Codebox project"
+              />
             </div>
           </div>
         )}
@@ -242,17 +247,18 @@ export default function EditorView() {
             />
           </div>
           <div className="form-control mt-4 flex gap-2">
-            <div className="badge-primary badge-secondary badge-error badge-info hidden"></div>
+            <div className="badge-primary badge-secondary badge-error badge-info hidden" />
             {tags.map((it) => (
-              <div
+              <button
                 key={it.documentId}
+                type="button"
                 onClick={() => pickTag(it)}
-                className={`badge cursor-pointer ${"badge-" + it.variant} ${
+                className={`badge cursor-pointer ${`badge-${it.variant}`} ${
                   tag === it.documentId ? "" : "badge-outline"
                 }`}
               >
                 {it.name}
-              </div>
+              </button>
             ))}
           </div>
         </ModalComponent>

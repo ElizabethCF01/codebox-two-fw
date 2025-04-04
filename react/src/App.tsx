@@ -1,8 +1,8 @@
 import { ToastContainer } from "react-toastify";
 import "./App.css";
-import Router from "./router";
-import NavbarComponent from "./components/shared/NavbarComponent";
 import FooterComponent from "./components/shared/FooterComponent";
+import NavbarComponent from "./components/shared/NavbarComponent";
+import Router from "./router";
 
 function App() {
   return (

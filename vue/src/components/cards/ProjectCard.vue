@@ -26,6 +26,8 @@
         class="ide w-full h-full bg-stone-900 transition-all ease-in"
         :srcdoc="content"
         sandbox="allow-scripts"
+        aria-label="Codebox project preview"
+        title="Codebox project preview"
       ></iframe>
     </div>
 
@@ -64,16 +66,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import type { Project } from '@/interfaces/project'
-import { Heart, Code } from 'lucide-vue-next'
-import { computed } from 'vue'
+import type { Project } from "@/interfaces/project";
+import { Code, Heart } from "lucide-vue-next";
+import { computed } from "vue";
 
 const props = defineProps({
   project: {
     type: Object as () => Project,
     required: true,
   },
-})
+});
 
 const content = computed(() => {
   return `
@@ -91,6 +93,6 @@ const content = computed(() => {
     <\/style>
    <script>
       ${props.project.jsCode}
-    <\/script> `
-})
+    <\/script> `;
+});
 </script>

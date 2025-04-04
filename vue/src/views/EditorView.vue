@@ -68,6 +68,8 @@
           class="ide w-full h-full bg-stone-900 transition-all ease-in"
           :srcdoc="output"
           sandbox="allow-scripts"
+          aria-label="Codebox project preview"
+          title="Codebox project preview"
         ></iframe>
       </div>
     </div>
@@ -91,55 +93,55 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, shallowRef } from 'vue'
-import type { editor as MonacoEditor } from 'monaco-editor'
-import { CirclePlay, Save } from 'lucide-vue-next'
-import * as monaco from 'monaco-editor'
-import ModalComponent from '@/components/shared/ModalComponent.vue'
-import { useAuthStore } from '@/stores/auth'
-import { useProjects } from '@/composables/useProject'
-import { useTag } from '@/composables/useTag'
-import type { Tag } from '@/interfaces/tag'
-import { useRoute, useRouter } from 'vue-router'
+import ModalComponent from "@/components/shared/ModalComponent.vue";
+import { useProjects } from "@/composables/useProject";
+import { useTag } from "@/composables/useTag";
+import type { Tag } from "@/interfaces/tag";
+import { useAuthStore } from "@/stores/auth";
+import { CirclePlay, Save } from "lucide-vue-next";
+import type { editor as MonacoEditor } from "monaco-editor";
+import * as monaco from "monaco-editor";
+import { onMounted, ref, shallowRef } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const MONACO_EDITOR_OPTIONS = {
   automaticLayout: true,
   formatOnType: true,
   formatOnPaste: true,
   fontSize: 16,
-}
+};
 
-const authStore = useAuthStore()
-const { createProject, getProjectById } = useProjects()
-const { getTagList } = useTag()
-const route = useRoute()
-const router = useRouter()
+const authStore = useAuthStore();
+const { createProject, getProjectById } = useProjects();
+const { getTagList } = useTag();
+const route = useRoute();
+const router = useRouter();
 
 const code = ref({
-  html: '<h1>hello world!</h1>',
-  css: 'body{ background: #1c1917;} \nh1 { color: white; }',
+  html: "<h1>hello world!</h1>",
+  css: "body{ background: #1c1917;} \nh1 { color: white; }",
   javascript: 'console.log("hello world");',
-})
+});
 
-const tabLanguage = ref<'html' | 'css' | 'javascript'>('html')
+const tabLanguage = ref<"html" | "css" | "javascript">("html");
 
-const showModal = ref(false)
-const editor = shallowRef()
-const isLoading = ref(false)
-const projectName = ref('')
+const showModal = ref(false);
+const editor = shallowRef();
+const isLoading = ref(false);
+const projectName = ref("");
 
-const tags = ref<Tag[]>([])
+const tags = ref<Tag[]>([]);
 
 const handleMount = (editorInstance: MonacoEditor.IStandaloneCodeEditor) => {
-  editor.value = editorInstance
+  editor.value = editorInstance;
   // Register a command to save the code using Cmd+S / Ctrl+S
   editor.value.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-    console.log('Guardando código:', code.value[tabLanguage.value])
-    getOutput()
-  })
-}
+    console.log("Guardando código:", code.value[tabLanguage.value]);
+    getOutput();
+  });
+};
 
-const output = ref('')
+const output = ref("");
 const getOutput = () => {
   output.value = `
     ${code.value.html}
@@ -156,37 +158,37 @@ const getOutput = () => {
     <\/style>
    <script>
     ${code.value.javascript}
-    <\/script>`
-}
+    <\/script>`;
+};
 
 const getProject = async () => {
-  isLoading.value = true
-  const project = await getProjectById(route.params.id.toString())
+  isLoading.value = true;
+  const project = await getProjectById(route.params.id.toString());
   if (project) {
-    code.value.html = project.htmlCode
-    code.value.css = project.cssCode
-    code.value.javascript = project.jsCode
+    code.value.html = project.htmlCode;
+    code.value.css = project.cssCode;
+    code.value.javascript = project.jsCode;
   }
-  getOutput()
-  isLoading.value = false
-}
+  getOutput();
+  isLoading.value = false;
+};
 onMounted(async () => {
-  if (route.params.id) await getProject()
+  if (route.params.id) await getProject();
   else {
-    tags.value = await getTagList()
-    getOutput()
+    tags.value = await getTagList();
+    getOutput();
   }
-})
-const tagSelected = ref('')
+});
+const tagSelected = ref("");
 
 const pickTag = (tag: Tag) => {
-  tagSelected.value = tag.documentId
-}
-const isSaving = ref(false)
+  tagSelected.value = tag.documentId;
+};
+const isSaving = ref(false);
 const handleSave = async () => {
-  if (!authStore.user) return
-  isSaving.value = true
-  showModal.value = false
+  if (!authStore.user) return;
+  isSaving.value = true;
+  showModal.value = false;
 
   const data = {
     name: projectName.value,
@@ -202,10 +204,10 @@ const handleSave = async () => {
         },
       ],
     },
-  }
+  };
 
-  const ok = await createProject({ data })
-  isSaving.value = false
-  if (ok) router.push({ name: 'home' })
-}
+  const ok = await createProject({ data });
+  isSaving.value = false;
+  if (ok) router.push({ name: "home" });
+};
 </script>

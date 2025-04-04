@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import type { SVGProps } from "react";
 
 export function IconGithub(props: SVGProps<SVGSVGElement>) {
   return (
@@ -9,6 +9,7 @@ export function IconGithub(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 24 24"
       {...props}
     >
+      <title>Github</title>
       <g
         fill="none"
         stroke="currentColor"
