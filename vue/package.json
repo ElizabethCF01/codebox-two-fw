@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test:unit": "vitest",
     "build-only": "vite build",
-    "typecheck": "vue-tsc --build"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@guolao/vue-monaco-editor": "^1.5.5",
