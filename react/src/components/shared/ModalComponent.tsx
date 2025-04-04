@@ -5,7 +5,7 @@ interface Props {
 }
 export default function ModalComponent({ title, close, children }: Props) {
   return (
-    <dialog id="my_modal_1" className="modal">
+    <dialog open id="my_modal_1" className="modal">
       <div className="modal-box border border-white/20">
         <h3 className="text-lg font-bold">{title}</h3>
         {children}
