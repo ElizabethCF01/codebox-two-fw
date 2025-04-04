@@ -93,5 +93,5 @@ codebox/
 
 ## Links
 
-[Vue](https://codebox-vue.netlify.app/)
-[Vue](https://codebox-react.netlify.app/)
+[Vue](https://codebox-vue.netlify.app/) and
+[React](https://codebox-react.netlify.app/)
