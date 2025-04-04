@@ -5,6 +5,8 @@
     "typecheck": "cd react && npm run typecheck && cd ../vue && npm run typecheck",
     "init": "npm i && cd react && npm i && cd ../vue && npm i",
     "dev": "(cd react && npm run dev &) && (cd vue && npm run dev &) && wait",
+    "dev:react": "cd react && npm run dev",
+    "dev:vue": "cd vue && npm run dev",
     "lint-format": "npx @biomejs/biome check --fix ."
   },
   "devDependencies": {
