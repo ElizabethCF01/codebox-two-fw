@@ -4,7 +4,6 @@ import { useAuthStore } from "@/stores/auth";
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { RouterLink } from "vue-router";
 
 // Mock Pinia
 vi.mock("@/stores/auth", () => ({

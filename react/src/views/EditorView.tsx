@@ -1,20 +1,12 @@
-import Editor from "@monaco-editor/react";
 import { CirclePlay, Save } from "lucide-react";
-import * as monaco from "monaco-editor";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import CodeEditor from "../components/editor/CodeEditor";
 import ModalComponent from "../components/shared/ModalComponent";
 import { useProject } from "../hooks/useProject";
 import { useTag } from "../hooks/useTag";
 import type { Tag } from "../interfaces/tag";
 import { useAuthStore } from "../stores/auth";
-
-const MONACO_EDITOR_OPTIONS = {
-  automaticLayout: true,
-  formatOnType: true,
-  formatOnPaste: true,
-  fontSize: 16,
-};
 
 export default function EditorView() {
   const user = useAuthStore((state) => state.user);
@@ -22,7 +14,6 @@ export default function EditorView() {
   const { getTagList } = useTag();
   const navigate = useNavigate();
   const { id } = useParams();
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>(null);
   const [output, setOutput] = useState("");
   const [projectName, setProjectName] = useState("");
   const [code, setCode] = useState({
@@ -57,15 +48,6 @@ export default function EditorView() {
     ${code.javascript}
     </script>`);
   };
-
-  function handleEditorDidMount(editor: monaco.editor.IStandaloneCodeEditor) {
-    editorRef.current = editor;
-
-    // Register a command for Ctrl+S / Cmd+S
-    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-      handleOutput();
-    });
-  }
 
   const getProject = async () => {
     setIsLoading(true);
@@ -179,6 +161,7 @@ export default function EditorView() {
                     onClick={() => setShowModal(true)}
                     type="button"
                     className="btn btn-outline font-bold"
+                    data-test-id="save-project"
                   >
                     {isSaving ? (
                       <span className="loading loading-spinner loading-sm" />
@@ -200,23 +183,16 @@ export default function EditorView() {
 
               <div className="flex-1 overflow-hidden">
                 <div className="h-full w-full py-4 font-mono text-lg bg-[#1e1e1e]">
-                  <Editor
+                  <CodeEditor
                     value={code[language]}
-                    theme="vs-dark"
-                    options={MONACO_EDITOR_OPTIONS}
-                    onMount={handleEditorDidMount}
                     language={language}
-                    onChange={() => {
-                      const value = editorRef.current?.getValue();
-                      if (value) {
-                        setCode((prev) => {
-                          return {
-                            ...prev,
-                            [language]: value,
-                          };
-                        });
-                      }
-                    }}
+                    onChange={(value) =>
+                      setCode((prev) => ({
+                        ...prev,
+                        [language]: value,
+                      }))
+                    }
+                    handleOutput={handleOutput}
                   />
                 </div>
               </div>

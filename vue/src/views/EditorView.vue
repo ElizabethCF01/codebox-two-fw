@@ -8,27 +8,27 @@
       <div class="h-[calc(100vh-70px)] w-full flex flex-col bg-stone-800 border-r border-white/40">
         <div class="p-2 gap-2 flex items-center">
           <div role="tablist" class="tabs tabs-box">
-            <a
+            <button
               role="tab"
               class="tab"
               :class="{ 'tab-active': tabLanguage === 'html' }"
               @click="tabLanguage = 'html'"
             >
-              HTML</a
+              HTML</button
             >
-            <a
+            <button
               role="tab"
               class="tab"
               :class="{ 'tab-active': tabLanguage === 'css' }"
               @click="tabLanguage = 'css'"
-              >CSS</a
+              >CSS</button
             >
-            <a
+            <button
               role="tab"
               class="tab"
               :class="{ 'tab-active': tabLanguage === 'javascript' }"
               @click="tabLanguage = 'javascript'"
-              >JS</a
+              >JS</button
             >
           </div>
           <div class="ml-auto"></div>
@@ -37,6 +37,7 @@
             @click="showModal = true"
             type="button"
             class="btn btn-outline font-bold"
+            data-testid="save-project"
           >
             <span v-show="isSaving" class="loading loading-spinner loading-sm"></span>
             <Save v-show="!isSaving" class="h-5 w-5" />
@@ -51,12 +52,17 @@
         <!-- monaco Editor -->
         <div class="flex-1 overflow-hidden">
           <div class="h-full w-full py-4 font-mono text-lg bg-[#1e1e1e]">
-            <vue-monaco-editor
+            <!-- <vue-monaco-editor
               v-model:value="code[tabLanguage]"
               theme="vs-dark"
               :options="MONACO_EDITOR_OPTIONS"
               @mount="handleMount"
               :language="tabLanguage"
+            /> -->
+            <CodeEditor
+              :code="code"
+              :tabLanguage="tabLanguage"
+              :getOutput="getOutput"
             />
           </div>
         </div>
@@ -93,23 +99,15 @@
 </template>
 
 <script setup lang="ts">
+import CodeEditor from "@/components/editor/CodeEditor.vue";
 import ModalComponent from "@/components/shared/ModalComponent.vue";
 import { useProjects } from "@/composables/useProject";
 import { useTag } from "@/composables/useTag";
 import type { Tag } from "@/interfaces/tag";
 import { useAuthStore } from "@/stores/auth";
 import { CirclePlay, Save } from "lucide-vue-next";
-import type { editor as MonacoEditor } from "monaco-editor";
-import * as monaco from "monaco-editor";
 import { onMounted, ref, shallowRef } from "vue";
 import { useRoute, useRouter } from "vue-router";
-
-const MONACO_EDITOR_OPTIONS = {
-  automaticLayout: true,
-  formatOnType: true,
-  formatOnPaste: true,
-  fontSize: 16,
-};
 
 const authStore = useAuthStore();
 const { createProject, getProjectById } = useProjects();
@@ -131,15 +129,6 @@ const isLoading = ref(false);
 const projectName = ref("");
 
 const tags = ref<Tag[]>([]);
-
-const handleMount = (editorInstance: MonacoEditor.IStandaloneCodeEditor) => {
-  editor.value = editorInstance;
-  // Register a command to save the code using Cmd+S / Ctrl+S
-  editor.value.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-    console.log("Guardando código:", code.value[tabLanguage.value]);
-    getOutput();
-  });
-};
 
 const output = ref("");
 const getOutput = () => {
