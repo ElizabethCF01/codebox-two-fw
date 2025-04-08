@@ -161,7 +161,7 @@ export default function EditorView() {
                     onClick={() => setShowModal(true)}
                     type="button"
                     className="btn btn-outline font-bold"
-                    data-test-id="save-project"
+                    data-testId="save-project"
                   >
                     {isSaving ? (
                       <span className="loading loading-spinner loading-sm" />
